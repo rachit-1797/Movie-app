@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css" />
+	<link href="https://bootswatch.com/4/darkly/bootstrap.min.css" rel="stylesheet" type="text/css">
+	</head>
+<body>
+	<nav   class="navbar navbar-expand-lg fixed-top navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">ICON</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="/movies/trending">Trending<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/movies">Most Popular<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/movies/toprated">Top Rated<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/movies/upcoming">Upcoming<span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <form action="/movies/search" method="POST" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2"name="movies" type="search" placeholder="Search" aria-label="Search" size=40>
+      <button class="btn btn-outline-success my-2 my-sm-0 button" type="submit">Search</button>
+    </form>
+    <ul class="navbar-nav " align="right">
+     <% if(!currentUser){ %>
+	<li class="nav-item mr-auto">
+        <a class="nav-link" href="/login">Log In<span class="sr-only">(current)</span></a>
+      </li>
+       <li class="nav-item mr-auto">
+        <a class="nav-link" href="/register">Sign Up<span class="sr-only">(current)</span></a>
+      </li>
+	   <% } else { %>
+		 <li class="nav-item mr-auto">
+        <a class="nav-link" href="/profile">Profile<span class="sr-only">(current)</span></a>
+      </li> 
+		<li class="nav-item mr-auto">
+        <a class="nav-link" href="/logout">Logout<span class="sr-only">(current)</span></a>
+      </li>
+		 <% } %>
+		
+    </ul>
+  </div>
+</nav>
+  <div class="container z-depth-1 my-5 px-0"  style="background-image: url(https://mdbootstrap.com/img/Photos/Others/background2.jpg); background-size: cover; background-position: center center;">
+
+  <!--Section: Content-->
+  <section class="p-5 my-md-5 text-center" 
+   >
+
+    <!-- Section heading -->
+    <h3 class="text-center font-weight-bold text-white mt-5 mb-3">Contact Us</h3>
+    <!-- Section description -->
+    <h4 class="text-center font-weight-normal text-white mx-auto mb-4 pb-2">We love to hear from you!</h4>
+
+    <form class="mb-5 mx-md-5" action="">
+
+      <div class="row">
+        <div class="col-md-4 mb-4">
+
+          <!-- Name -->
+          <input type="text"name="name" id="name" class="form-control" placeholder="Name">
+
+        </div>
+        <div class="col-md-4 mb-4">
+
+          <!-- Email -->
+          <input type="email" name="email"id="email" class="form-control" placeholder="Email">
+
+        </div>
+        <div class="col-md-4 mb-4">
+
+          <!-- Phone -->
+          <input type="number" name="phone" id="phone" class="form-control" placeholder="Phone (optional)">
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 mb-4">
+
+          <!-- Subject -->
+          <input type="text" name="subject" id="subject" class="form-control" placeholder="Subject">
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+
+          <div class="form-group mb-4">
+            <textarea class="form-control rounded"name="message"  id="message" rows="3" placeholder="How can we help?"></textarea>
+          </div>
+
+          <div class="text-center">
+            <button type="submit" class="btn btn-elegant">Submit</button>
+          </div>
+
+        </div>
+      </div>
+
+    </form>
+
+  </section>
+  <!--Section: Content-->
+
+
+</div>
+	
+
+<%- include ("partials/footer") %>

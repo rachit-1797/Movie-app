@@ -1,0 +1,124 @@
+<!-- <h1>Login!</h1>
+<form action="/login" method="POST">
+    <input type="text" name="username" placeholder="username">
+    <input type="password" name="password" placeholder="password">
+    <input type="submit" value="Login!">
+</form> -->
+
+<head>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<link href="https://bootswatch.com/4/darkly/bootstrap.min.css" rel="stylesheet" type="text/css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<style>
+	body {
+    margin: 0;
+    padding: 0;
+    
+    height: 100vh;
+  }
+  #login .container #login-row #login-column #login-box {
+    margin-top: 120px;
+    max-width: 600px;
+    height: 320px;
+    border: 1px solid #9C9C9C;
+    
+  }
+  #login .container #login-row #login-column #login-box #login-form {
+    padding: 20px;
+  }
+  #login .container #login-row #login-column #login-box #login-form #register-link {
+    margin-top: -85px;
+  }
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark bootstrap-iso">
+  <a class="navbar-brand" href="#">ICON</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="/movies/trending">Trending<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/movies">Most Popular<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/movies/toprated">Top Rated<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/movies/upcoming">Upcoming<span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" size=40>
+      <button class="btn btn-outline-success my-2 my-sm-0 button" type="submit">Search</button>
+    </form>
+    <ul class="navbar-nav " align="right">
+     <% if(!currentUser){ %>
+	<li class="nav-item mr-auto">
+        <a class="nav-link" href="/login">Log In<span class="sr-only">(current)</span></a>
+      </li>
+       <li class="nav-item mr-auto">
+        <a class="nav-link" href="/register">Sign Up<span class="sr-only">(current)</span></a>
+      </li>
+	   <% } else { %>
+		 <li class="nav-item mr-auto">
+        <a class="nav-link" href="/profile">Profile<span class="sr-only">(current)</span></a>
+      </li> 
+		<li class="nav-item mr-auto">
+        <a class="nav-link" href="/logout">Logout<span class="sr-only">(current)</span></a>
+      </li>
+		 <% } %>
+    </ul>
+  </div>
+</nav>
+	<% if( error&& error.length>0){%>
+	<div class=" container alert alert-danger" role="alert">
+		<h6 align="center"> <%= error%></h6>
+	</div>
+	<%}%>
+    <div id="login">
+        <h3 class="text-center text-white pt-5">Login form</h3>
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form" action="/login" method="POST">
+                            <h3 class="text-center text-info">Login</h3>
+                            <div class="form-group">
+                                <label for="username" class="text-info">Username:</label><br>
+                                <input type="text" name="username" id="username" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="text-info">Password:</label><br>
+                                <input type="password" name="password" id="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                            </div>
+                            <div id="register-link" class="text-right">
+                                <a href="/register" class="text-info">Register here</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+<script>
+		var mainpart = window.location.protocol + "//" + window.location.host;
+var path = '/' + window.location.pathname;
+$('ul a').each(function(){
+    var Link  = $(this).attr('href').replace(mainpart, '');
+    if (Link === path || '/' + Link === path){ $(this).addClass('active');}
+});
+	</script>
+</body>

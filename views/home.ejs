@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<!--
+	Retrospect by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+	 <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link href="https://bootswatch.com/4/darkly/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		
+		<link rel="stylesheet" href="main.css" />
+		<link href="https://bootswatch.com/4/darkly/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+	</head>
+	<body class="landing">
+
+		<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="#"><i class="fab fa-mdb"></i></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="/movies/trending">Trending<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/movies">Most Popular<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/movies/toprated">Top Rated<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/movies/upcoming">Upcoming<span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <form action="/movies/search" method="POST" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2"name="movies" type="search" placeholder="Search" aria-label="Search" size=40>
+      <button class="btn btn-outline-success my-2 my-sm-0 button" type="submit">Search</button>
+    </form>
+    <ul class="navbar-nav " align="right">
+     <% if(!currentUser){ %>
+	<li class="nav-item mr-auto">
+        <a class="nav-link" href="/login">Log In<span class="sr-only">(current)</span></a>
+      </li>
+       <li class="nav-item mr-auto">
+        <a class="nav-link" href="/register">Sign Up<span class="sr-only">(current)</span></a>
+      </li>
+	   <% } else { %>
+		 <li class="nav-item mr-auto">
+        <a class="nav-link" href="/profile">Profile<span class="sr-only">(current)</span></a>
+      </li> 
+		<li class="nav-item mr-auto">
+        <a class="nav-link" href="/logout">Logout<span class="sr-only">(current)</span></a>
+      </li>
+		 <% } %>
+		
+    </ul>
+  </div>
+</nav>
+<i class="fab fa-mdb"></i>
+		<!-- Banner -->
+			<section id="banner">
+				<!-- <i class="icon fa-diamond"></i> -->
+				<h2>MovieApp</h2>
+				<p>A website where to get full information about any movie  </p>
+				<ul class="actions">
+					<li><a href="/movies/trending" class="button big special">Go to website</a></li>
+				</ul>
+			</section>
+
+		<!-- One -->
+			<section id="one" class="wrapper style1">
+				<div class="inner">
+					<article class="feature left">
+						<span class="image"><img src="images/pic01.jpg" alt="" /></span>
+						<div class="content">
+							<h2>About The site</h2>
+							<p>This is site that contains complete information about any movie that you want to watch.You can also
+							login and add movies to watchlist.You can also add comments to website.There is also a rating feature.   </p>
+							<ul class="actions">
+								<li>
+									<a href="#" class="button alt">More</a>
+								</li>
+							</ul>
+						</div>
+					</article>
+					<article class="feature right">
+						<span class="image"><img src="images/pic02.jpg" alt="" /></span>
+						<div class="content">
+							<h2>About The Developers</h2>
+							<p>This website is developed by two students of Malviya National Institute of Technology.</p>
+							<ul class="actions">
+								<li>
+									<a href="#" class="button alt">More</a>
+								</li>
+							</ul>
+						</div>
+					</article>
+					<article class="feature left">
+						<span class="image"><img src="images/pic02.jpg" alt="" /></span>
+						<div class="content">
+							<h2>Akshit</h2>
+							<p>This website is developed by two students of Malviya National Institute of Technology.</p>
+							<ul class="icons">
+						<li><a href="#" class="icon fa-facebook">
+							<span class="label">Facebook</span>
+						</a></li>
+						<li><a href="#" class="icon fa-twitter">
+							<span class="label">Twitter</span>
+						</a></li>
+						<li><a href="https://www.instagram.com/akshitagarwal10505/" class="icon fa-instagram">
+							<span class="label">Instagram</span>
+						</a></li>
+						<li><a href="https://www.linkedin.com/in/akshit-agarwal-7ab47b196/" class="icon fa-linkedin">
+							<span class="label">LinkedIn</span>
+						</a></li>
+					</ul>
+						</div>
+					</article>
+					<article class="feature right">
+						<span class="image"><img src="images/pic02.jpg" alt="" /></span>
+						<div class="content">
+							<h2>Rachit</h2>
+							<p>This website is developed by two students of Malviya National Institute of Technology.</p>
+							<ul class="icons">
+						<li><a href="https://www.facebook.com/people/Rachit-Gupta/100008031009320" class="icon fa-facebook">
+							<span class="label">Facebook</span>
+						</a></li>
+						<li><a href="#" class="icon fa-twitter">
+							<span class="label">Twitter</span>
+						</a></li>
+						<li><a href="https://www.instagram.com/rachit1797/" class="icon fa-instagram">
+							<span class="label">Instagram</span>
+						</a></li>
+						<li><a href="https://www.linkedin.com/in/rachit-gupta-98667519a?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B4ji%2Bv%2FyKQQu7xJ8ZunEFWw%3D%3D" class="icon fa-linkedin">
+							<span class="label">LinkedIn</span>
+						</a></li>
+					</ul>
+						</div>
+					</article>
+				</div>
+			</section>
+
+		
+
+		<!-- Footer -->
+			<%- include ("partials/footer") %>
+
+
+		<!-- Scripts -->
+			<script src="jquery.min.js"></script>
+			<script src="skel.min.js"></script>
+			<script src="util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="main.js"></script>
+
+	</body>
+</html>
+

@@ -1,0 +1,292 @@
+<% var img1,img2 %>
+		<% img1="http://image.tmdb.org/t/p/w500"+data.poster_path %> 
+		<% img2="http://image.tmdb.org/t/p/original"+data.backdrop_path %> 
+<html>
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	 <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://bootswatch.com/4/darkly/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<!-- <link href="https://bootswatch.com/4/cyborg/bootstrap.min.css" rel="stylesheet" type="text/css"> -->
+<style>
+	.button {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+}
+	.rating-box .ratings .fa{
+  font-size: 40px;
+  color:#FF9800;
+  float: left;
+  cursor: pointer;
+}
+	.ratings{
+		margin:5 5 5 2;
+	}
+	.image2{
+		background-size: cover;
+		background-image:url("https://sterimaxinc.com/wp-content/uploads/2014/09/home-slider-big-black-box.png") , url(<%=img2%>)
+			/* linear-gradient(to bottom, rgba(255,255,255,0.01) 100%,rgba(255,255,255,0.1) 100%) */
+	}
+	.form form{
+		display:inline-block;
+	}
+	.rating-box div{
+		display:inline-block;
+	}
+	.fillheight {
+    width:100%;
+		height:auto;
+}
+	.img1{
+		vertical-align:middle
+	}
+</style></head>
+<body>
+ <nav class="navbar  fixed-top navbar-expand-lg navbar navbar-dark bg-dark bootstrap-iso">
+  <a class="navbar-brand" href="#">ICON</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="/movies/trending">Trending<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/movies">Most Popular<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/movies/toprated">Top Rated<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/movies/upcoming">Upcoming<span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <form action="/movies/search" method="POST" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2"name="movies" type="search" placeholder="Search" aria-label="Search" size=40>
+      <button class="btn btn-outline-success my-2 my-sm-0 button" type="submit">Search</button>
+    </form>
+    <ul class="navbar-nav " align="right">
+     <% if(!currentUser){ %>
+	<li class="nav-item mr-auto">
+        <a class="nav-link" href="/login">Log In<span class="sr-only">(current)</span></a>
+      </li>
+       <li class="nav-item mr-auto">
+        <a class="nav-link" href="/register">Sign Up<span class="sr-only">(current)</span></a>
+      </li>
+	   <% } else { %>
+		 <li class="nav-item mr-auto">
+        <a class="nav-link" href="/profile">Profile<span class="sr-only">(current)</span></a>
+      </li> 
+		<li class="nav-item mr-auto">
+        <a class="nav-link" href="/logout">Logout<span class="sr-only">(current)</span></a>
+      </li>
+		 <% } %>
+    </ul>
+  </div>
+</nav>
+<br>
+<br>
+<br>
+	<%if(moviesuccess&&moviesuccess.length>0){ %>
+	<div class=" container alert alert-success" role="alert">
+		<h4 align="center"> <%= moviesuccess%></h4>
+	</div>
+	<%}%>
+<div   class="container-fluid back" >
+	<div class="jumbotron bg-cover  image2" >
+	<div class="row" >
+		<div class=" col-lg-3 offset-lg-0.75 col-md-6 offset-lg-0 col-sm-6 image1">
+			<div class="thumbnail">
+				<img class=" fillheight img1" alt="Responsive image" src=<%= img1 %>>
+			</div>
+		</div>
+		<div class="col-lg-6 offset-lg-1 col-md-6 offset-lg-0 data" >
+			
+				<h1 class="display-4">
+					<%=data.original_title%></h1>
+				<h6 align="left">
+					Release Date:      
+					<b>
+					<%=data.release_date%>
+					</b>
+				</h6>
+				<h6>
+					Genre:<% for( var i=0;i<data.genres.length;i++){ %>
+				<% if(i==parseInt(data.genres.length)-1){%>
+			                <b><%=data.genres[i].name%></b> 
+				<% }else{ %>
+			                <b><%=data.genres[i].name%> ||</b> 
+				
+					<% }} %>
+				</h6>
+				<h6>
+					Duration:        <b><%=data.runtime%>min</b>  
+				</h6>
+				<h6>
+					Adult:          <b><%=data.adult%></b>   
+				</h6>
+				<h6>
+					Original language: <b><%=data.original_language%></b>
+				</h6>
+				<h4>
+					Tagline:         <b><%=data.tagline%></b> 
+					</h4>
+					 
+			
+				<h4>
+					Overview:</h4>
+					<p>
+									<%=data.overview%>
+					</p>
+				
+				<h4>
+					
+					Home page:
+					<b>
+						<a href="<%=data.homepage%>"><%=data.homepage%>
+					</a>
+					</b>
+				</h4>
+		<% if(x==0){%>
+			<a href="/watchlist/<%=data.id%>"> <i class="fa fa-plus fa-3x" aria-hidden="true"></i></a>
+				 <%}%>
+		<%if(x==1){%>
+			<form  action="/remove/<%=data1._id%>? _method=DELETE"method="POST">
+				<button style="border:1px solid black; background-color: transparent;">
+					<i class="fa fa-check-square fa-3x" style="color:#00bc8c"aria-hidden="true"></i>
+				</button>
+			</form>
+			<%}%>
+			<form action="/favourate/<%=data.id%>" method="GET">
+			<i class="fa fa-heart-o fa-3x" aria-hidden="true"></i>
+			<i class="fa fa-heart fa-3x" aria-hidden="true"></i>
+		</form>
+				</div>
+			<div class="rating-box">
+				<%- include ("partials/rating") %> 
+			</div>
+		
+			
+	    </div>
+	</div>
+</div>
+	</div>
+	<div class="container">
+    <div class="row">
+        <h1 style="text-align: center">Add New Comment to <%= data.original_title %></h1>
+	</div>
+        <div class="row form-group shadow-textarea">
+            <form action="/comments/<%=data.id%>" method="POST">
+                
+                    <textarea  class="form-control z-depth-1" id="exampleFormControlTextarea6" placeholder="Write something here..." cols="150"
+						rows="7" name="comment" >
+					</textarea>
+        </div>
+         <div class="row">     
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block">Submit!</button>
+                </div>
+            </div>
+            </form>
+            <a href="/movies">Go Back</a>
+        </div>
+    </div>
+</div>
+
+	<div align="center">
+		<h1 align="left">
+			Comments to this movie:-
+		</h1>
+		<% for(var j=0;j<com.length;j++){%>
+		<strong> User Name:<%= com[j].author.username %></strong>
+		<h1>
+			Comment:
+			<%=com[j].text%>
+		</h1>
+	
+	<% } %>
+		</div>
+<footer class="page-footer font-small grey lighten-3 py-4 dark-grey-text">
+
+  <!-- Footer Elements -->
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-4">
+        <h3 class="font-weight-bold mb-0">MDB</h3>
+      </div>
+      <div class="col-md-4">
+        <ul class="list-unstyled d-flex justify-content-center mb-0 mt-2">
+          <li>
+          	<a class="mx-3" role="button">About</a>
+          </li>
+          <li>
+          	<a class="mx-3" role="button">Blog</a>
+          </li>
+          <li>
+          	<a class="mx-3" role="button">Policy</a>
+          </li>
+          <li>
+          	<a class="mx-3" role="button">Contact</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <!-- Copyright -->
+        <div class="footer-copyright text-right bg-transparent dark-grey-text mt-2">© 2019.
+          <a class="dark-grey-text" href="https://mdbootstrap.com/education/bootstrap/"> All rights reserved.</a>
+        </div>
+        <!-- Copyright -->
+      </div>
+    </div>
+
+  </div>
+  <!-- Footer Elements -->
+
+</footer>
+	<script>
+	
+
+ const stars=document.querySelector(".ratings").children;
+ const ratingValue=document.querySelector("#rating-value");
+  let index;
+  
+  for(let i=0; i<stars.length; i++){
+  	stars[i].addEventListener("mouseover",function(){
+  		 // console.log(i)
+  		 for(let j=0; j<stars.length; j++){
+  		 	stars[j].classList.remove("fa-star");		 	
+            stars[j].classList.add("fa-star-o");		 	
+  		 }
+  		 for(let j=0; j<=i; j++){
+  		 	stars[j].classList.remove("fa-star-o");		 	
+           stars[j].classList.add("fa-star");		 	
+  		 }
+  	})
+  	stars[i].addEventListener("click",function(){
+      ratingValue.value=i+1;
+      index=i;
+  	})
+  	stars[i].addEventListener("mouseout",function(){
+  		 
+  		 for(let j=0; j<stars.length; j++){
+  		 	stars[j].classList.remove("fa-star");		 	
+            stars[j].classList.add("fa-star-o");		 	
+  		 }
+  		 for(let j=0; j<=index; j++){
+  		 	stars[j].classList.remove("fa-star-o");		 	
+           stars[j].classList.add("fa-star");		 	
+  		 }
+  	})
+  }
+</script>
+</body>
+	<%- include ("partials/footer") %> 
+	
