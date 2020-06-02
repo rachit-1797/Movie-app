@@ -182,25 +182,18 @@
       </li>
     </ul>
     <form action="/movies/search" method="POST" class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2"name="movies" type="search" placeholder="Search" aria-label="Search" size=40>
+      <input class="form-control mr-sm-2"name="movies" type="search" placeholder="Enter the movie name" aria-label="Search" size=40>
       <button class="btn btn-outline-success my-2 my-sm-0 button" type="submit">Search</button>
     </form>
     <ul class="navbar-nav " align="right">
-     <% if(!currentUser){ %>
-	<li class="nav-item mr-auto">
-        <a class="nav-link" href="/login">Log In<span class="sr-only">(current)</span></a>
-      </li>
-       <li class="nav-item mr-auto">
-        <a class="nav-link" href="/register">Sign Up<span class="sr-only">(current)</span></a>
-      </li>
-	   <% } else { %>
+     
 		 <li class="nav-item mr-auto">
         <a class="nav-link" href="/profile">Profile<span class="sr-only">(current)</span></a>
       </li> 
 		<li class="nav-item mr-auto">
         <a class="nav-link" href="/logout">Logout<span class="sr-only">(current)</span></a>
       </li>
-		 <% } %>
+		 
     </ul>
   </div>
 </nav>
@@ -224,8 +217,8 @@
 	<div id="facebookicon">
                 <div class="icon" class="myDIV">
 									<a href="/favourate"><i class="fa fa-heart fa-3x" aria-hidden="true"></i></a>
-									<h4>
-										<%=currentUser.favourate.length%>
+									<h4>	<%=flen%>	
+										
 									</h4>
 									</div>
                 </div>
@@ -235,8 +228,8 @@
 				   <div id="facebookicon1">
                <div class="icon" class="myDIV">
 				   <a href="/comments"><i class="fa fa-comment fa-3x" aria-hidden="true"></i></a>
-										<h4>
-											<%=currentUser.comment.length%>
+										<h4><%=currentUser.comment.length%>
+											
 										</h4>
 									</div>
                 </div>
@@ -249,8 +242,8 @@
 					<a href="/watchlist"><i class="fa fa-list fa-3x" aria-hidden="true"></i></a>
 
 													<h4>
-														<%=wlen %>
-													</h4>
+													<%=wlen %>								
+					</h4>
 									</div>
                 </div>
             <h6 id="onhoverfb2">View Watchlist</h6> 
@@ -261,7 +254,7 @@
                 <div class="icon" class="myDIV">
 					<a href="/rating"><i class="fa fa-star fa-3x" aria-hidden="true"></i></a>
 										<h4>
-												<%=currentUser.rating.length%>
+												<%=currentUser.rating.length%>			
 										</h4>
 									</div>
                 </div>
@@ -302,4 +295,4 @@ $('ul a').each(function(){
 });
 	</script>
 </body>
-</html>						
+</html>			

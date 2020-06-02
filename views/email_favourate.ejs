@@ -2,47 +2,54 @@
 <head>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	<link href="https://bootswatch.com/4/darkly/bootstrap.min.css" rel="stylesheet" type="text/css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	 <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style>
-	.offset-lg-1 {
-    margin-left: 2.3333333333%;
+
+	.center {
+	vertical-align:center;
+	margin: 60px;
+    margin-top: 15px;
+	}
+	.right {
+  position: absolute;
+  right: 0px;
+  width: 400px;
+  padding: 10px;
 }
-	.navbar-dark .nav-item > .nav-link.active  {
-    color:white;
-}
+	.row{
+		margin: 0 0 0 0px;
+	}
+	.heading div{
+		display:inline-block
+	}
+	.exp{visibility: hidden;}
 	.text {
    overflow: hidden;
    text-overflow: ellipsis;
    display: -webkit-box;
-   -webkit-line-clamp: 3; /* number of lines to show */
+   -webkit-line-clamp: 2; /* number of lines to show */
    -webkit-box-orient: vertical;
 }
-	.card-title {
-   overflow: hidden;
-   text-overflow: ellipsis;
-   display: -webkit-box;
-   -webkit-line-clamp: 1; /* number of lines to show */
-   -webkit-box-orient: vertical;
-}
-	
 	.image1{
 		height: 200px;
 	}
+	
 </style>
 </head>
 <body>
-<nav   class="navbar navbar-expand-lg fixed-top navbar navbar-dark bg-dark">
+<nav class="navbar fixed-top navbar-expand-lg navbar navbar-dark bg-dark">
   <a class="navbar-brand" href="#">ICON</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto bar1">
+    <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link " href="/movies/trending">Trending<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/movies/trending">Trending<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/movies">Most Popular<span class="sr-only">(current)</span></a>
@@ -55,7 +62,7 @@
       </li>
     </ul>
     <form action="/movies/search" method="POST" class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2"name="movies" type="search" placeholder="Search" aria-label="Search" size=40>
+      <input class="form-control mr-sm-2"name="movies" type="search" placeholder="Enter the movie name" aria-label="Search" size="30">
       <button class="btn btn-outline-success my-2 my-sm-0 button" type="submit">Search</button>
     </form>
     <ul class="navbar-nav " align="right">
@@ -78,44 +85,26 @@
     </ul>
   </div>
 </nav>
-	<br>
-	<br>
-	<br>
-	<%if(success&&success.length>0){ %>
-	<div class=" container alert alert-success" role="alert">
-		<h4 align="center"> <%= success%></h4>
-	</div>
-	<%}%>
+<br>
+<br>
+<br>
 <div class=".container-fluid">
-
-		<div class="row">
-		<% for(var i=0;i<parsedData.results.length;i++){ %>
-		<% var result %>
-
-		<% result=parsedData.results[i] %>
-		<% images="http://image.tmdb.org/t/p/w500"+result.poster_path %>
-		<% img2="http://image.tmdb.org/t/p/original"+result.backdrop_path %> 
-		<div align ="left" class=" col-lg-2 offset-lg-0.5 col-md-4 offset-lg-1 col-sm-6  col-xs-9 offset-xs-1">
-			<div class="card text-white bg-dark mb-3" >
-  		<% if(result.poster_path==undefined){ %>
-				<img class="card-img-top"src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Noimage.svg/739px-Noimage.svg.png'alt="Card image cap">
-				<% } else { %>
-				<img class="card-img-top"src=<%= images %> alt="Card image cap">
-		<% } %>
-  <div class="card-body">
-    <h5 class="card-title" style="color:blue"><%= result.title %></h5>
-    <p class="card-text text"><%= result.overview %></p>
-   <form action="/movies/search/<%= result.id %>" method="GET" class="inline" >
-        <button class="btn btn-outline-success my-2 my-sm-0 button" type="link" align ="right">
-          More Info..
-        </button>
-        </form>
-    
-  </div>
-		</div>
-			</div>
-		<% } %>
-		</div>
+	<div style="align:center">
+		<h1 style="color:blue;align:right">
+				Email Your Favourites
+		</h1>
+	</div>
 	
-</div>
+<div>
+	<form action="/send/favourate" method="POST" class="form-inline my-2 my-lg-0 and center">
+      <input class="form-control mr-sm-2"name="email" type="search" placeholder="Enter Your email" aria-label="Search" size=40>
+      <button class="btn btn-outline-success my-2 my-sm-0 button" type="submit">Submit</button>
+	</form>
+	</div>
+	</div><form action="/profile" method="GET" class="inline" align ="center" >
+				<button class="btn btn-outline-success my-2 my-sm-0 button" type="link" >
+					Back To Profile
+				</button>
+				</form>
+	<br>
 <%- include ("partials/footer") %>

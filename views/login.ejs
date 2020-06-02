@@ -33,18 +33,18 @@
 </style>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark bootstrap-iso">
+<nav   class="navbar navbar-expand-lg fixed-top navbar navbar-dark bg-dark">
   <a class="navbar-brand" href="#">ICON</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav mr-auto bar1">
       <li class="nav-item">
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href="/movies/trending">Trending<span class="sr-only">(current)</span></a>
+        <a class="nav-link " href="/movies/trending">Trending<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/movies">Most Popular<span class="sr-only">(current)</span></a>
@@ -56,8 +56,8 @@
         <a class="nav-link" href="/movies/upcoming">Upcoming<span class="sr-only">(current)</span></a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" size=40>
+    <form action="/movies/search" method="POST" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2"name="movies" type="search" placeholder="Enter the movie name" aria-label="Search" size=40>
       <button class="btn btn-outline-success my-2 my-sm-0 button" type="submit">Search</button>
     </form>
     <ul class="navbar-nav " align="right">
@@ -76,6 +76,7 @@
         <a class="nav-link" href="/logout">Logout<span class="sr-only">(current)</span></a>
       </li>
 		 <% } %>
+		
     </ul>
   </div>
 </nav>
@@ -84,6 +85,14 @@
 		<h6 align="center"> <%= error%></h6>
 	</div>
 	<%}%>
+	<div>
+		
+		
+		<br>
+		<br>
+	</div>
+	
+	
     <div id="login">
         <h3 class="text-center text-white pt-5">Login form</h3>
         <div class="container">
@@ -121,4 +130,10 @@ $('ul a').each(function(){
     if (Link === path || '/' + Link === path){ $(this).addClass('active');}
 });
 	</script>
-</body>
+	<div>
+	</div>
+	<br>
+	<br>
+	<br>
+	
+		<%- include ("partials/footer") %>

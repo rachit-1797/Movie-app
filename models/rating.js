@@ -5,7 +5,9 @@ mongoose.connect("mongodb://localhost/mov",{
 	useCreateIndex: true,
 	useNewUrlParser:true});
 var ratingSchema = new mongoose.Schema({
-    id: String,
+    name:String,
+	img:String,
+	id: String,
 	rating:Number
 });
 

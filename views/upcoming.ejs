@@ -3,6 +3,12 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	<link href="https://bootswatch.com/4/darkly/bootstrap.min.css" rel="stylesheet" type="text/css">
 <style>
+	.nex-pre form{
+		display:inline;
+	}
+	.offset-lg-1 {
+    margin-left: 0;
+}
 	.text {
    overflow: hidden;
    text-overflow: ellipsis;
@@ -40,7 +46,7 @@
       </li>
     </ul>
     <form action="/movies/search" method="POST" class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2"name="movies" type="search" placeholder="Search" aria-label="Search" size=40>
+      <input class="form-control mr-sm-2"name="movies" type="search" placeholder="Enter the Movie Nmae" aria-label="Search" size=40>
       <button class="btn btn-outline-success my-2 my-sm-0 button" type="submit">Search</button>
     </form>
     <ul class="navbar-nav " align="right">
@@ -63,54 +69,49 @@
     </ul>
   </div>
 </nav>
-	<h1 align="center">
-		Page No. <%= parsedData.page %>
-	</h1>
+	<br>
+	<br>
+	<br>
 <div class=".container-fluid">
 
 		<div class="row">
-		<% for(var i=0;i<12;i++){ %>
+		<% for(var i=0;i<18;i++){ %>
 		<% var result %>
 
 		<% result=parsedData.results[i] %>
 		<% images="http://image.tmdb.org/t/p/w500"+result.poster_path %>
-		<div class=" col-lg-3 offset-lg-1 col-md-4 offset-lg-1 col-sm-6">
-			<div class="thumbnail">
-				<img class="img-responsive image1" src=<%= images %>>
-			</div>
-			<div class="caption">
-				<h4><%= result.title %></h4>
-				<h6>
-					<%=result.release_date%>
-				</h6>
-				<div class="text">
-					<%= result.overview %>
-				</div>
-				<form action="/movies/search/<%= result.id %>" method="GET" class="inline" >
-				<button class="btn btn-outline-success my-2 my-sm-0 button" type="link" align ="right">
-					More Info..
-				</button>
-				</form>
-			</div>
+		<% img2="http://image.tmdb.org/t/p/original"+result.backdrop_path %> 
+		<div align ="left" class=" col-lg-2 offset-lg-0 col-md-3 offset-md-0 col-sm-6  col-xs-9 offset-xs-1">
+			<div class="card text-white bg-dark mb-3" >
+  <img class="card-img-top"src=<%= images %> alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title" style="color:blue"><%= result.title %></h5>
+	<h6><%=result.release_date%></h6>
+    <p class="card-text text"><%= result.overview %></p>
+   <form action="/movies/search/<%= result.id %>" method="GET" class="inline"  align="left" style="margin:auto">
+        <button class="btn btn-outline-success my-2 my-sm-0 button" type="link">
+          More Info..
+        </button>
+        </form>
+  </div>
 		</div>
+			</div>
 		<% } %>
 		</div>
-
-
 	
 </div>
 
 <br>
-	<div align="center" >
-	 <form action="/movies/upcoming/next" method="GET" class="inline" >
- <button type="submit" class="btn btn-outline-success my-2 my-sm-0 button" > NEXT</button>
- </form>
-	<form action="/movies/upcoming/previous" method="GET" class="inline" >
+	<div align="center" class="nex-pre" >
+	<form action="/movies/trending/previous" method="GET" style="margin:15 3 3 3px" >
 		<button class="btn btn-outline-success my-2 my-sm-0 button" type="submit" align="center">
 	PREVIOUS
 	</button>
 		</form>
+	 <form action="/movies/trending/next" method="GET" style="margin:3 3 3 3px" >
+ <button type="submit" class="btn btn-outline-success my-2 my-sm-0 button" > NEXT</button>
+ </form>
 	</div>
-
+	<Br>
 <%- include ("partials/footer") %>
 

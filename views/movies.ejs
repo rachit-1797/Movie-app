@@ -1,16 +1,15 @@
 <%- include("partials/header") %>
 <br>
-	<div align="center" >
-	 <form action="/movies/next" method="GET" class="inline" >
- <button type="submit" class="btn btn-outline-success my-2 my-sm-0 button" > NEXT</button>
- </form>
-	<form action="/movies/previous" method="GET" class="inline" >
-		<button class="btn btn-outline-success my-2 my-sm-0 button" type="submit" align="center">
+	<div align="center" class="nex-pre" >
+	<form action="/movies/trending/previous" method="GET" >
+		<button class="btn btn-outline-success my-2 my-sm-0 button" type="submit" align="center"style="margin:15 3 3 3px">
 	PREVIOUS
 	</button>
 		</form>
-	</div>
-
+	 <form action="/movies/trending/next" method="GET" class="inline" >
+ <button type="submit" class="btn btn-outline-success my-2 my-sm-0 button" style="margin:3 3 3 3px"> NEXT</button>
+ </form>
+<br>
 
 <%- include ("partials/footer") %>
 

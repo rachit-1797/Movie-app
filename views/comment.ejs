@@ -82,25 +82,26 @@
 
 		<% result=parsedData[i] %>
 		<% images="http://image.tmdb.org/t/p/w500"+result.img %> 
-		<div class=" col-lg-3 offset-lg-1 col-md-4 offset-lg-1 col-sm-6 ">
-			<div class="thumbnail">
-				<img class="img-responsive image1" src=<%= images %>>
-			</div>
-			<div class="caption">
-				<h4><%= result.movie %></h4>
-				<div class="text" >
+	
+	<div align ="left" class=" col-lg-2 offset-lg-0 col-md-3 offset-md-0 col-sm-6  col-xs-9 offset-xs-1">
+			<div class="card text-white bg-dark mb-3" >
+  <img class="card-img-top"src=<%= images %> alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title" style="color:blue"><%= result.name %></h5>
+    <div class="text" >
 					<h4>
 						Comment:
 					</h4>
 					<%= result.text %>
 				</div>
-				<form action="/movies/search/<%= result.id %>" method="GET" class="inline" >
-				<button class="btn btn-outline-success my-2 my-sm-0 button" type="link" align ="right">
-					More Info..
-				</button>
-				</form>
-			</div>
+   <form action="/movies/search/<%= result.id %>" method="GET" class="inline"  align="left" style="margin:auto">
+        <button class="btn btn-outline-success my-2 my-sm-0 button" type="link">
+          More Info..
+        </button>
+        </form>
+  </div>
 		</div>
+			</div>
 		<% } %>
 		</div>
 	<br>
@@ -111,4 +112,6 @@
 					Back To Profile
 				</button>
 				</form>
+	<br>
 <%- include ("partials/footer") %>
+	

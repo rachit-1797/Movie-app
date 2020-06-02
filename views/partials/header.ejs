@@ -1,11 +1,15 @@
 <html>
 <head>
+		 <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	<link href="https://bootswatch.com/4/darkly/bootstrap.min.css" rel="stylesheet" type="text/css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
+	.nex-pre form{
+		display:inline
+	}
 	.offset-lg-1 {
-    margin-left: 2.3333333333%;
+    margin-left: 0;
 }
 	.navbar-dark .nav-item > .nav-link.active  {
     color:white;
@@ -24,7 +28,6 @@
    -webkit-line-clamp: 1; /* number of lines to show */
    -webkit-box-orient: vertical;
 }
-	
 	.image1{
 		height: 200px;
 	}
@@ -55,7 +58,7 @@
       </li>
     </ul>
     <form action="/movies/search" method="POST" class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2"name="movies" type="search" placeholder="Search" aria-label="Search" size=40>
+      <input class="form-control mr-sm-2"name="movies" type="search" placeholder="Enter the movie name" aria-label="Search" size=40>
       <button class="btn btn-outline-success my-2 my-sm-0 button" type="submit">Search</button>
     </form>
     <ul class="navbar-nav " align="right">
@@ -89,20 +92,25 @@
 <div class=".container-fluid">
 
 		<div class="row">
-		<% for(var i=0;i<15;i++){ %>
+		<% for(var i=0;i<18;i++){ %>
 		<% var result %>
 
 		<% result=parsedData.results[i] %>
 		<% images="http://image.tmdb.org/t/p/w500"+result.poster_path %>
 		<% img2="http://image.tmdb.org/t/p/original"+result.backdrop_path %> 
-		<div align ="left" class=" col-lg-2 offset-lg-0.5 col-md-4 offset-lg-1 col-sm-6  col-xs-9 offset-xs-1">
+		<div align ="left" class=" col-lg-2 offset-lg-0 col-md-3 offset-md-0 col-sm-6  col-xs-9 offset-xs-1">
 			<div class="card text-white bg-dark mb-3" >
-  <img class="card-img-top"src=<%= images %> alt="Card image cap">
+				<% if(result.poster_path==undefined){ %>
+				<img class="card-img-top"src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Noimage.svg/739px-Noimage.svg.png'alt="Card image cap">
+				<% } else { %>
+				<img class="card-img-top"src=<%= images %> alt="Card image cap">
+				<% } %>
+  
   <div class="card-body">
     <h5 class="card-title" style="color:blue"><%= result.title %></h5>
     <p class="card-text text"><%= result.overview %></p>
-   <form action="/movies/search/<%= result.id %>" method="GET" class="inline" >
-        <button class="btn btn-outline-success my-2 my-sm-0 button" type="link" align ="right">
+   <form action="/movies/search/<%= result.id %>" method="GET" class="inline"  align="left" style="margin:auto">
+        <button class="btn btn-outline-success my-2 my-sm-0 button" type="link">
           More Info..
         </button>
         </form>

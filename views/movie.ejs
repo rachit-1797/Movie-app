@@ -8,6 +8,16 @@
 	<link href="https://bootswatch.com/4/darkly/bootstrap.min.css" rel="stylesheet" type="text/css">
 	<!-- <link href="https://bootswatch.com/4/cyborg/bootstrap.min.css" rel="stylesheet" type="text/css"> -->
 <style>
+	.blue{
+		color:blue;
+	}
+	.links form{
+		display:inline;
+	}
+	.and div{
+		display:inline;
+	}
+	.exp{visibility: hidden;}
 	.button {
     background-color: Transparent;
     background-repeat:no-repeat;
@@ -29,6 +39,9 @@
 		background-size: cover;
 		background-image:url("https://sterimaxinc.com/wp-content/uploads/2014/09/home-slider-big-black-box.png") , url(<%=img2%>)
 			/* linear-gradient(to bottom, rgba(255,255,255,0.01) 100%,rgba(255,255,255,0.1) 100%) */
+	} 
+	.data form{
+		display:inline;
 	}
 	.form form{
 		display:inline-block;
@@ -154,33 +167,58 @@
 					</a>
 					</b>
 				</h4>
+			<br>
+		<div class="links">
 		<% if(x==0){%>
-			<a href="/watchlist/<%=data.id%>"> <i class="fa fa-plus fa-3x" aria-hidden="true"></i></a>
+				<form method="GET" action="/watchlist/<%=data.id%>" style="margin:3 3 3 3px">
+                
+				<button style="border:1px solid black; background-color: transparent;">
+					<i class="fa fa-plus fa-3x" style="color:#00bc8c"aria-hidden="true"></i>
+				</button>
+			</form>
 				 <%}%>
 		<%if(x==1){%>
-			<form  action="/remove/<%=data1._id%>? _method=DELETE"method="POST">
-				<button style="border:1px solid black; background-color: transparent;">
+			<form  action="/remove/fromwatchlist/<%=data1._id%>? _method=DELETE"method="POST"style="margin:3 3 3 3px">
+				<button style="border:0.5px solid black; background-color: transparent;">
 					<i class="fa fa-check-square fa-3x" style="color:#00bc8c"aria-hidden="true"></i>
 				</button>
 			</form>
 			<%}%>
-			<form action="/favourate/<%=data.id%>" method="GET">
-			<i class="fa fa-heart-o fa-3x" aria-hidden="true"></i>
-			<i class="fa fa-heart fa-3x" aria-hidden="true"></i>
-		</form>
-				</div>
-			<div class="rating-box">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<% if(y==0){%>
+			<form method="GET" action="/favourate/<%=data.id%>"style="margin:3 3 3 3px">
+				<button style="border:none; background-color: transparent;">
+					<i class="fa fa-heart-o fa-3x" style="color:#00bc8c"aria-hidden="true"></i>
+				</button>
+			</form>
+				 <%}%>
+		<%if(y==1){%>
+			<form  action="/remove/fromfavourate/<%=data2._id%>? _method=DELETE"method="POST">
+				<button style="border:none; background-color: transparent;">
+					<i class="fa fa-heart fa-3x" style="color:#00bc8c"aria-hidden="true"></i>
+				</button>
+			</form>
+			<%}%>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button onclick="unhide()"style="border:none; background-color: transparent;">
+					<i class="fa fa-star fa-3x" style="color:#00bc8c" aria-hidden="true"></i>
+				</button>
+			<div class="rating-box exp">
 				<%- include ("partials/rating") %> 
 			</div>
-		
+			<h3>
+	
+	Avg Rating: &nbsp;&nbsp;<%=avg_rating %>/5
+</h3>
+			</div>	
+				</div>
 			
 	    </div>
 	</div>
 </div>
-	</div>
 	<div class="container">
     <div class="row">
-        <h1 style="text-align: center">Add New Comment to <%= data.original_title %></h1>
+        <h1 style="text-align: center">Add New Review to <%= data.original_title %></h1>
 	</div>
         <div class="row form-group shadow-textarea">
             <form action="/comments/<%=data.id%>" method="POST">
@@ -197,19 +235,23 @@
             </form>
             <a href="/movies">Go Back</a>
         </div>
-    </div>
-</div>
 
 	<div align="center">
-		<h1 align="left">
-			Comments to this movie:-
+		<h1 align="center" color="blue">
+			Reviews
 		</h1>
+		<br>
 		<% for(var j=0;j<com.length;j++){%>
-		<strong> User Name:<%= com[j].author.username %></strong>
-		<h1>
-			Comment:
+		<div style="border: 2px solid while; width:500px">
+			
+		<div style="border: 2px solid white; width:500px">
+			<h4 >
 			<%=com[j].text%>
-		</h1>
+		</h4>
+			</div>
+		<h3 align="right" style="text-color:blue"><%= com[j].author.username %></h3>
+		<br>
+		</div>
 	
 	<% } %>
 		</div>
@@ -287,6 +329,13 @@
   	})
   }
 </script>
+<script>function unhide() {
+    var hid = document.getElementsByClassName("exp");
+    // Emulates jQuery $(element).is(':hidden');
+    if(hid[0].offsetWidth > 0 && hid[0].offsetHeight > 0) {
+        hid[0].style.visibility = "visible";
+    }
+}</script>
 </body>
 	<%- include ("partials/footer") %> 
 	

@@ -1,4 +1,3 @@
-
 var request          = require('request');
 var express          = require('express');
 var flash			 = require('connect-flash');
@@ -91,8 +90,7 @@ app.post("/login", passport.authenticate("local",
 // logic route
 app.get("/logout", function(req, res){
    req.logout();
-	req.flash("success","Successfully logged out!!");
-   res.redirect("/movies");
+   res.redirect("/movies/trending");
 });
 
 function isLoggedIn(req, res, next){
@@ -111,22 +109,45 @@ function isLoggedIn(req, res, next){
 			
 		}else{
 		console.log(user.watchlist.length);
-		res.render("profile",{wlen:user.watchlist.length});
+		User.findOne({username:y}).populate("favourate").exec(function(err,user1){
+			
+		res.render("profile",{wlen:user.watchlist.length,flen:user1.favourate.length});
+		});
 		}
 		});
 	});
 });
-	app.get("/liked",isLoggedIn,function(req,res){
-	res.render('likedmovies');
+app.get("/rating",isLoggedIn,function(req,res){
+	var y=req.user.username;
+	User.findOne({username:y}).populate("rating").exec(function(err,user){
+		if(err){
+			
+		}else{
+			res.render("rating",{rating:user.rating});
+		}
+	});
+	
 	});
  app.post("/rating/:id",isLoggedIn, function(req, res){
 	var x=req.user.username;
-	var id=req.params.id;
+	g=1;
 	var val= req.body.Rate;
-		console.log(val);
-	var newrating={id:id,rating:val};
-		rating.create(newrating,function(err,new_rating){	
-		if(err){
+	var id = req.params.id;
+	var id1=id;
+	var data;
+	var url="https://api.themoviedb.org/3/movie/" +id+ "?api_key=bf63276b9aa2afdd6dd932ce83d82ab1&language=en-US";
+	
+	request(url,function(error,response,body){
+
+	if(!error&&response.statusCode==200)
+	{
+   		data=JSON.parse(body);
+		var name=data.original_title,
+	    id=data.id,img=data.poster_path,
+		description=data.overview
+		var newmovie={name:name,id:id,img:img,rating:val}
+		rating.create(newmovie,function(err,new_update){	
+			if(err){
             	console.log(err);
         	} 
 			else {
@@ -137,16 +158,15 @@ function isLoggedIn(req, res, next){
 						console.log("cannot find  loggesd in user in database");
 					}
 					else{
-						founduser.rating.push(new_rating);
+						founduser.rating.push(new_update);
 						founduser.save(function(err,data){
 						if(err){
 							console.log("error in saving your watchlist data");
 						}else{
-							
-							console.log(founduser.rating);
-							var url="/movies/search/"+id;
+							//console.log(data);
+							var url="/movies/search/"+id1;
 							//console.log(url);
-							req.flash("moviesuccess","Your rating has been recorded!!")
+							req.flash("moviesuccess","Your Rating has been recorded!!");
 							res.redirect(url);
 						}
 					});
@@ -154,13 +174,18 @@ function isLoggedIn(req, res, next){
 			});
 				
 		}
+    });
+				
+					  
 			
 	
-
-	})});
+	}
+		
+	});
+	});
 // watchlist-------
 //-----------------------
-app.post("/remove/:id",isLoggedIn,function(req,res){
+app.post("/remove/fromwatchlist/:id",isLoggedIn,function(req,res){
 	console.log(req.params.id);
 	g=0;
 	var id1;
@@ -253,6 +278,24 @@ app.get("/watchlist/:id",isLoggedIn,function(req,res)
 });
 // favourate
 //-----------------
+app.post("/remove/fromfavourate/:id",isLoggedIn,function(req,res){
+	console.log(req.params.id);
+	g=0;
+	var id1;
+	
+	var y=req.user.username;
+	console.log(req.user);
+	favourate.findById(req.params.id,function(err,movie){
+		id1=movie.id;
+		
+	
+	favourate.findByIdAndRemove(req.params.id,function(error,movie1){
+		var url="/movies/search/"+id1;
+		req.flash("moviesuccess","Successfully removed the movie from your watchlist!!");
+		res.redirect(url);
+	})	
+	})
+});
 app.get("/favourate",isLoggedIn,function(req,res)
 {
 	var y=req.user.username;
@@ -266,10 +309,11 @@ app.get("/favourate",isLoggedIn,function(req,res)
 	});
 	
 });
+
 app.get("/favourate/:id",isLoggedIn,function(req,res)
 {
 	var x=req.user.username;
-	
+	g=1;
 	var id = req.params.id;
 	var id1=id;
 	var data;
@@ -308,6 +352,7 @@ app.get("/favourate/:id",isLoggedIn,function(req,res)
 							//console.log(data);
 							var url="/movies/search/"+id1;
 							//console.log(url);
+							req.flash("moviesuccess","Successfully added the movie to your favourate!!");
 							res.redirect(url);
 						}
 					});
@@ -410,6 +455,7 @@ app.get("/movies/search/:id",isLoggedIn,function(req,res){
     var url="https://api.themoviedb.org/3/movie/" +id+ "?api_key=bf63276b9aa2afdd6dd932ce83d82ab1&language=en-US";
 	var y=req.user.username;
 	var x=0;
+	var z=0;
 User.findOne({username:y}).populate("watchlist").exec(function(err,user){
 		if(err){
 			
@@ -430,7 +476,7 @@ if(!error&&response.statusCode==200)
 {
    data=JSON.parse(body);
 	//console.log(data1);
-	var com,fav=0,list=0,data1;
+	var com,fav=0,list=0,data1,data2;
 	
 	comment.find({movieid:id},function(err,com){
 	//console.log(com[0].author.username);
@@ -461,12 +507,21 @@ if(!error&&response.statusCode==200)
 							x=1;
 						}
 					}}
-	//console.log(x);
-	//console.log(user.watchlist);
-	//console.log(req.user.watchlist);
-		//console.log(g,"g");
-		res.render("movie",{data:data,data1:data1,com:com,avg_rating:avg_rating,list:list,fav:fav,x:x});
-    });
+		
+		User.findOne({username:y}).populate("favourate").exec(function(err,user3){
+			for(var j=0;j<user3.favourate.length;j++)
+				{if(user3.favourate[j].id==id)
+						{
+							data2=user3.favourate[j];
+							z=1;
+							console.log(z);
+						}
+					}
+			console.log(user3.favourate.length);
+			console.log(z);
+		res.render("movie",{data:data,data1:data1,data2:data2,com:com,avg_rating:avg_rating,list:list,fav:fav,x:x,y:z});
+			});
+		});
 	
 });
 	});
@@ -528,6 +583,122 @@ transporter.sendMail(mailOptions, function(error, info){
 	
 res.redirect("/contact")
 });
+app.get('/email/watchlist',function(req,res){
+	res.render("email_watchlist");
+});
+app.get('/email/favourate',function(req,res){
+	res.render("email_favourate");
+});
+app.post('/send/favourate',function(req,res){
+	console.log(req.body.email);
+	var y=req.user.username;
+	var x=0;
+User.findOne({username:y}).populate("favourate").exec(function(err,user){
+		if(err){
+			
+		}else{
+			var output=[];
+			var name=`This is your watchlist`;
+			output.push(name);	
+			for(var i=0;i<user.watchlist.length;i++)
+				{
+var name=`
+Nmae:${user.watchlist[i].name}
+Description:${user.watchlist[i].description}`
+				output.push(name);
+				}
+			output=output.join("\n");
+			
+			var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'rachitgupta241797@gmail.com',
+    pass: 'omtraders24.'
+  }
+});
+
+var mailOptions = {
+  from: 'rachitgupta241797@gmail.com',
+  to: req.body.email,
+  subject: 'Sending Email using Node.js',
+  text: output
+  // html: '<h1>Hi Smartherd</h1><p>Your Messsage</p>'        
+};
+
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+  }
+});
+			
+			
+			
+			
+			
+			
+			//console.log(output);
+		}
+});
+	req.flash("success","Successfully, mailed your favourite list!!")
+	res.redirect("/favourate");
+});
+app.post('/send/watchlist',function(req,res){
+	console.log(req.body.email);
+	var y=req.user.username;
+	var x=0;
+User.findOne({username:y}).populate("watchlist").exec(function(err,user){
+		if(err){
+			
+		}else{
+			var output=[];
+			var name=`This is your watchlist`;
+			output.push(name);	
+			for(var i=0;i<user.watchlist.length;i++)
+				{
+var name=`
+Nmae:${user.watchlist[i].name}
+Description:${user.watchlist[i].description}`
+				output.push(name);
+				}
+			output=output.join("\n");
+			
+			var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'rachitgupta241797@gmail.com',
+    pass: 'omtraders24.'
+  }
+});
+
+var mailOptions = {
+  from: 'rachitgupta241797@gmail.com',
+  to: req.body.email,
+  subject: 'Sending Email using Node.js',
+  text: output
+  // html: '<h1>Hi Smartherd</h1><p>Your Messsage</p>'        
+};
+
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+  }
+});
+			
+			
+			
+			
+			
+			
+			//console.log(output);
+		}
+});
+	req.flash("success","Successfully, mailed your Watchlist list!!")
+	res.redirect("/watchlist");
+});
 
 app.use(mostpopularroutes)
 app.use(topratedroutes)
@@ -536,6 +707,6 @@ app.use(moviesroutes)
 app.use(trendingroutes)
 app.use(searchroutes)
 	
-app.listen(process.env.PORT,process.env.IP,function(){
+app.listen(3000,function(){
   console.log("server has started")
 });

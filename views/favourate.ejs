@@ -2,7 +2,21 @@
 <head>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	<link href="https://bootswatch.com/4/darkly/bootstrap.min.css" rel="stylesheet" type="text/css">
+	 <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style>
+	.right {
+  position: absolute;
+  right: 0px;
+  width: 400px;
+  padding: 10px;
+}
+	.row{
+		margin: 0 0 0 0px;
+	}
+	.heading div{
+		display:inline-block
+	}
 	.text {
    overflow: hidden;
    text-overflow: ellipsis;
@@ -64,14 +78,34 @@
     </ul>
   </div>
 </nav>
+	<br>
+	<br>
+	<br>
+	<%if(success&&success.length>0)
+		{%>
+			<div class=" container alert alert-success" role="alert">
+		<h4 align="center"> <%= success%></h4>
+	</div>
+		<%}%>
+	<br>
 	<div align="center">
-	<br>
-	<br>
-	<br>
-	<br>
-	<h1 style="color:blue">
-	Favourites</h1>
+	<div class="row"style="text-align:right">
+		<div class="col-lg-7 offset-lg-0.5">
+			<h1 style="color:blue;align:right">
+				Favourites
+			</h1>
+		</div>
+		<div  class="col-lg-5">
+			<form action="/email/favourate" method="GET" >
+			<button class="btn btn-outline-success my-2 my-sm-0 button" onclick="unhide()">
+			<i class="fa fa-share-alt fa-2x" aria-hidden="true"></i>
+			</button>
+			</form>
+		</div>
+	</div>
+		
 </div>
+	<br>
 	<br>
 <div class=".container-fluid">
 
@@ -82,22 +116,26 @@
 
 		<% result=parsedData[i] %>
 		<% images="http://image.tmdb.org/t/p/w500"+result.img %> 
-		<div class=" col-lg-3 offset-lg-1 col-md-4 offset-lg-1 col-sm-6 ">
-			<div class="thumbnail">
-				<img class="img-responsive image1" src=<%= images %>>
-			</div>
-			<div class="caption">
-				<h4><%= result.name %></h4>
-				<div class="text">
-					<%= result.description %>
+	
+	<div align ="left" class=" col-lg-2 offset-lg-0 col-md-3 offset-md-0 col-sm-6  col-xs-9 offset-xs-1">
+			<div class="card text-white bg-dark mb-3" >
+  <img class="card-img-top"src=<%= images %> alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title" style="color:blue"><%= result.name %></h5>
+    <div class="text" >
+					<p>
+						<%=result.description%>
+		</p>
 				</div>
-				<form action="/movies/search/<%= result.id %>" method="GET" class="inline" >
-				<button class="btn btn-outline-success my-2 my-sm-0 button" type="link" align ="right">
-					More Info..
-				</button>
-				</form>
-			</div>
+	  <br>
+   <form action="/movies/search/<%= result.id %>" method="GET" class="inline"  align="left" style="margin:auto">
+        <button class="btn btn-outline-success my-2 my-sm-0 button" type="link">
+          More Info..
+        </button>
+        </form>
+  </div>
 		</div>
+			</div>
 		<% } %>
 		</div>
 	<br>
@@ -108,4 +146,5 @@
 					Back To Profile
 				</button>
 				</form>
+	<br>
 <%- include ("partials/footer") %>
