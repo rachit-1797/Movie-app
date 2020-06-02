@@ -8,6 +8,9 @@
 	<link href="https://bootswatch.com/4/darkly/bootstrap.min.css" rel="stylesheet" type="text/css">
 	<!-- <link href="https://bootswatch.com/4/cyborg/bootstrap.min.css" rel="stylesheet" type="text/css"> -->
 <style>
+	.addMore:hover {
+   background-color: #545454;
+}
 	.blue{
 		color:blue;
 	}
@@ -170,44 +173,43 @@
 			<br>
 		<div class="links">
 		<% if(x==0){%>
-				<form method="GET" action="/watchlist/<%=data.id%>" style="margin:3 3 3 3px">
+				<a href="#" data-toggle="tooltip" title="Add to Watchlist"><form method="GET" action="/watchlist/<%=data.id%>" style="margin:3 3 3 3px">
                 
 				<button style="border:1px solid black; background-color: transparent;">
 					<i class="fa fa-plus fa-3x" style="color:#00bc8c"aria-hidden="true"></i>
 				</button>
-			</form>
+					</form></a>
 				 <%}%>
 		<%if(x==1){%>
-			<form  action="/remove/fromwatchlist/<%=data1._id%>? _method=DELETE"method="POST"style="margin:3 3 3 3px">
+			<a href="#" data-toggle="tooltip" title="Remove from watchlist"><form  action="/remove/fromwatchlist/<%=data1._id%>? _method=DELETE"method="POST"style="margin:3 3 3 3px">
 				<button style="border:0.5px solid black; background-color: transparent;">
 					<i class="fa fa-check-square fa-3x" style="color:#00bc8c"aria-hidden="true"></i>
 				</button>
-			</form>
+				</form></a>
 			<%}%>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<% if(y==0){%>
-			<form method="GET" action="/favourate/<%=data.id%>"style="margin:3 3 3 3px">
-				<button style="border:none; background-color: transparent;">
+			<a href="#" data-toggle="tooltip" title="Add to fav"><form method="GET" action="/favourate/<%=data.id%>"style="margin:3 3 3 3px">
+				<button class="addMore" title="Hover on me!"style="border:none; background-color: transparent;">
 					<i class="fa fa-heart-o fa-3x" style="color:#00bc8c"aria-hidden="true"></i>
 				</button>
-			</form>
+				</form></a>
 				 <%}%>
 		<%if(y==1){%>
-			<form  action="/remove/fromfavourate/<%=data2._id%>? _method=DELETE"method="POST">
+		<a href="#" data-toggle="tooltip" title="Remove from fav">	<form  action="/remove/fromfavourate/<%=data2._id%>? _method=DELETE"method="POST">
 				<button style="border:none; background-color: transparent;">
 					<i class="fa fa-heart fa-3x" style="color:#00bc8c"aria-hidden="true"></i>
 				</button>
-			</form>
+			</form></a>
 			<%}%>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button onclick="unhide()"style="border:none; background-color: transparent;">
+				<a href="#" data-toggle="tooltip" title="Rate it"><button onclick="unhide()"style="border:none; background-color: transparent;">
 					<i class="fa fa-star fa-3x" style="color:#00bc8c" aria-hidden="true"></i>
-				</button>
+					</button></a>
 			<div class="rating-box exp">
 				<%- include ("partials/rating") %> 
 			</div>
 			<h3>
-	
 	Avg Rating: &nbsp;&nbsp;<%=avg_rating %>/5
 </h3>
 			</div>	
@@ -335,7 +337,10 @@
     if(hid[0].offsetWidth > 0 && hid[0].offsetHeight > 0) {
         hid[0].style.visibility = "visible";
     }
-}</script>
+}
+	$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})</script>
 </body>
 	<%- include ("partials/footer") %> 
 	
