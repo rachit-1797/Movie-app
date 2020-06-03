@@ -706,7 +706,7 @@ app.use(upcomingroutes)
 app.use(moviesroutes)
 app.use(trendingroutes)
 app.use(searchroutes)
-	
+//	process.env.PORT
 app.listen(process.env.PORT,function(){
   console.log("server has started")
 });
