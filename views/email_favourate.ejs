@@ -89,22 +89,27 @@
 <br>
 <br>
 <div class=".container-fluid">
-	<div style="align:center">
+	<div align="center">
 		<h1 style="color:blue;align:right">
 				Email Your Favourites
 		</h1>
-	</div>
-	
-<div>
+		<div align="right">
 	<form action="/send/favourate" method="POST" class="form-inline my-2 my-lg-0 and center">
       <input class="form-control mr-sm-2"name="email" type="search" placeholder="Enter Your email" aria-label="Search" size=40>
       <button class="btn btn-outline-success my-2 my-sm-0 button" type="submit">Submit</button>
 	</form>
 	</div>
-	</div><form action="/profile" method="GET" class="inline" align ="center" >
+	</div>
+	</div>
+
+<br>
+<div>
+	<form action="/profile" method="GET" class="inline" align ="center" >
 				<button class="btn btn-outline-success my-2 my-sm-0 button" type="link" >
 					Back To Profile
 				</button>
 				</form>
+	</div>
+		
 	<br>
 <%- include ("partials/footer") %>

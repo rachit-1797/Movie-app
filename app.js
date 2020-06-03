@@ -90,7 +90,7 @@ app.post("/login", passport.authenticate("local",
 // logic route
 app.get("/logout", function(req, res){
    req.logout();
-   res.redirect("/movies/trending");
+   res.redirect("/");
 });
 
 function isLoggedIn(req, res, next){
@@ -598,13 +598,13 @@ User.findOne({username:y}).populate("favourate").exec(function(err,user){
 			
 		}else{
 			var output=[];
-			var name=`This is your watchlist`;
+			var name=`This is your favourite list`;
 			output.push(name);	
-			for(var i=0;i<user.watchlist.length;i++)
+			for(var i=0;i<user.favourate.length;i++)
 				{
 var name=`
-Nmae:${user.watchlist[i].name}
-Description:${user.watchlist[i].description}`
+Nmae:${user.favourate[i].name}
+Description:${user.favourate[i].description}`
 				output.push(name);
 				}
 			output=output.join("\n");

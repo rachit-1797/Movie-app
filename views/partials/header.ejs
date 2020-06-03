@@ -84,6 +84,7 @@
 	<br>
 	<br>
 	<br>
+	<%=parsedData.page%>
 	<%if(success&&success.length>0){ %>
 	<div class=" container alert alert-success" role="alert">
 		<h4 align="center"> <%= success%></h4>
@@ -92,7 +93,7 @@
 <div class=".container-fluid">
 
 		<div class="row">
-		<% for(var i=0;i<20;i++){ %>
+		<% for(var i=0;i<18;i++){ %>
 		<% var result %>
 
 		<% result=parsedData.results[i] %>

@@ -68,7 +68,7 @@
 		
     </ul>
   </div>
-</nav>
+</nav>cd ..
 	<br>
 	<br>
 	<br>
@@ -81,9 +81,13 @@
 		<% result=parsedData.results[i] %>
 		<% images="http://image.tmdb.org/t/p/w500"+result.poster_path %>
 		<% img2="http://image.tmdb.org/t/p/original"+result.backdrop_path %> 
-		<div align ="left" class=" col-lg-2 offset-lg-0 col-md-3 offset-md-0 col-sm-6  col-xs-9 offset-xs-1">
+		<div align ="left" class=" col-lg-2 offset-lg-O col-md-3 offset-md-0 col-sm-6  col-xs-9 offset-xs-1">
 			<div class="card text-white bg-dark mb-3" >
-  <img class="card-img-top"src=<%= images %> alt="Card image cap">
+  <% if(result.poster_path==undefined){ %>
+				<img class="card-img-top"src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Noimage.svg/739px-Noimage.svg.png'alt="Card image cap">
+				<% } else { %>
+				<img class="card-img-top"src=<%= images %> alt="Card image cap">
+				<% } %>
   <div class="card-body">
     <h5 class="card-title" style="color:blue"><%= result.title %></h5>
 	<h6><%=result.release_date%></h6>
@@ -112,6 +116,10 @@
  <button type="submit" class="btn btn-outline-success my-2 my-sm-0 button" > NEXT</button>
  </form>
 	</div>
-	<Br>
+	<br>
+<h3 align="center" style="textcolor:red">
+<%=parsedData.page%>
+</h3>
+	<br>
 <%- include ("partials/footer") %>
 
