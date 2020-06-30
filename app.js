@@ -69,7 +69,7 @@ app.post("/register", function(req, res){
             return res.render("register");
         }
         passport.authenticate("local")(req, res, function(){
-		   req.flash("success","Hurrah,You have successfully registred and logged in as"+ req.body.username+" !!")
+		   req.flash("success","Hurrah,You have successfully registred and logged in as "+ req.body.username+" !!")
            res.redirect("/movies"); 
         });
     });
@@ -603,7 +603,7 @@ User.findOne({username:y}).populate("favourate").exec(function(err,user){
 			for(var i=0;i<user.favourate.length;i++)
 				{
 var name=`
-Nmae:${user.favourate[i].name}
+Name:${user.favourate[i].name}
 Description:${user.favourate[i].description}`
 				output.push(name);
 				}
@@ -658,7 +658,7 @@ User.findOne({username:y}).populate("watchlist").exec(function(err,user){
 			for(var i=0;i<user.watchlist.length;i++)
 				{
 var name=`
-Nmae:${user.watchlist[i].name}
+Name:${user.watchlist[i].name}
 Description:${user.watchlist[i].description}`
 				output.push(name);
 				}

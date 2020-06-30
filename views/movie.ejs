@@ -175,14 +175,14 @@
 		<% if(x==0){%>
 				<a href="#" data-toggle="tooltip" title="Add to Watchlist"><form method="GET" action="/watchlist/<%=data.id%>" style="margin:3 3 3 3px">
                 
-				<button style="border:1px solid black; background-color: transparent;">
+				<button style="border:none; background-color: transparent;">
 					<i class="fa fa-plus fa-3x" style="color:#00bc8c"aria-hidden="true"></i>
 				</button>
 					</form></a>
 				 <%}%>
 		<%if(x==1){%>
 			<a href="#" data-toggle="tooltip" title="Remove from watchlist"><form  action="/remove/fromwatchlist/<%=data1._id%>? _method=DELETE"method="POST"style="margin:3 3 3 3px">
-				<button style="border:0.5px solid black; background-color: transparent;">
+				<button style="border:none; background-color: transparent;">
 					<i class="fa fa-check-square fa-3x" style="color:#00bc8c"aria-hidden="true"></i>
 				</button>
 				</form></a>
@@ -264,29 +264,10 @@
 
     <div class="row">
       <div class="col-md-4">
-        <h3 class="font-weight-bold mb-0">MDB</h3>
-      </div>
-      <div class="col-md-4">
-        <ul class="list-unstyled d-flex justify-content-center mb-0 mt-2">
-          <li>
-          	<a class="mx-3" role="button">About</a>
-          </li>
-          <li>
-          	<a class="mx-3" role="button">Blog</a>
-          </li>
-          <li>
-          	<a class="mx-3" role="button">Policy</a>
-          </li>
-          <li>
-          	<a class="mx-3" role="button">Contact</a>
-          </li>
-        </ul>
       </div>
       <div class="col-md-4">
         <!-- Copyright -->
-        <div class="footer-copyright text-right bg-transparent dark-grey-text mt-2">© 2019.
-          <a class="dark-grey-text" href="https://mdbootstrap.com/education/bootstrap/"> All rights reserved.</a>
-        </div>
+        
         <!-- Copyright -->
       </div>
     </div>
